@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './App.css';
-import Navbar from './components/layout/Navbar';
-import axios from 'axios';
+import Navbar from './layout/Navbar';
+import PokemonBox from './layout/PokemonBox';
 
-export default class App extends Component {
-	static displayName = App.name;
-
-	render() {
-		return (
-			<Router>
-				<div className='App'>
-					<div className='container'>
-						<Navbar />
-					</div>
-				</div>
-			</Router>
-		);
-	}
+function App() {
+	return (
+		<Router>
+			<div className='App'></div>
+			<Navbar />
+			<br />
+			<div className='container'></div>
+			<Route exact path='/' />
+			<Route path='/pokemons' component={() => <PokemonBox />} />
+			<Route path='/types' />
+		</Router>
+	);
 }
+
+export default App;

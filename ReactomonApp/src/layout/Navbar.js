@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 function Navbar() {
 	return (
 		<header style={headerStyle}>
-			<h1>Roland's Reactomons</h1>
+			<h1>
+				<Link style={linkStyle} to='/'>
+					Roland's Reactomons
+				</Link>
+			</h1>
 			<Link style={linkStyle} to='/pokemons'>
 				Pokemons
 			</Link>{' '}
