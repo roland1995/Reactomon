@@ -14,11 +14,12 @@ function PokemonCard(props) {
 
 	const Card = styled.div`
 		font-weight: bold;
+		text-align: center;
 		box-shadow: 0 1px 3px;
 		color: #fff;
 		background-color: black;
 		&:hover {
-			box-shadow: 0 5px 10px;
+			box-shadow: 0 6px 10px;
 		}
 	`;
 
@@ -41,7 +42,7 @@ function PokemonCard(props) {
 					{Index}
 				</div>
 				<div className='card-body mx-auto'>
-					<h6 className='card-title'>{props.name}</h6>
+					<h5 className='card-title'>{props.name}</h5>
 					<StyledImage
 						className='card-img-center rounded mx-auto mt-2'
 						src={Image}
