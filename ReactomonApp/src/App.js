@@ -4,14 +4,14 @@ import Navbar from './layout/Navbar';
 import PokemonBox from './layout/PokemonBox';
 import TypeBox from './layout/TypeBox';
 import DetailedView from './pages/DetailedView';
+import MainBox from './layout/MainBox';
 
 function App() {
 	return (
 		<Router>
 			<div className='App'></div>
 			<Navbar />
-			<div className='container'></div>
-			<Route exact path='/' />
+			<Route exact path='/' component={() => <MainBox />} />
 			<Route path='/pokemons' component={() => <PokemonBox />} />
 			<Route path='/types' component={() => <TypeBox />} />
 			<Route path='/pokemon' component={() => <DetailedView />} />
