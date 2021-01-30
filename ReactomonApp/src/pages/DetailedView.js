@@ -1,11 +1,23 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useHttp } from '../hooks/http';
 function DetailedView() {
 	var url = window.location.href.replace(/\/$/, '');
 	var id = url.substr(url.lastIndexOf('/') + 1);
-	const [pokemon, setPokemons] = useState([]);
-	const sprites = pokemon.sprites;
+
+	const [isLoading, fetchedData] = useHttp(
+		`https://pokeapi.co/api/v2/pokemon/${id}`,
+		[]
+	);
+
+	const pokemon = fetchedData
+		? {
+				name: fetchedData.data.name,
+				height: fetchedData.data.height,
+				weight: fetchedData.data.weight,
+				imageUrl: fetchedData.data.sprites.front_default,
+		  }
+		: [];
 
 	const StyledPokemonDetail = styled.div`
 		text-align: center;
@@ -26,30 +38,20 @@ function DetailedView() {
 		textAlign: 'center',
 		padding: '10px',
 	};
-
-	useEffect(() => {
-		axios
-			.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-			.then((res) => setPokemons(res.data));
-	}, []);
-
-	return (
-		<StyledPokemonDetail>
-			<div>
-				<h2 style={headerStyle}>{pokemon.name}</h2>{' '}
-				<img
-					src={
-						'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/' +
-						id +
-						'.png'
-					}
-					alt={pokemon.name}
-				/>
-				<h4>weight: {pokemon.weight}</h4>
-				<h4>height: {pokemon.height}</h4>
-			</div>
-		</StyledPokemonDetail>
-	);
+	if (!isLoading) {
+		return <div>Loading..</div>;
+	} else {
+		return (
+			<StyledPokemonDetail>
+				<div>
+					<h2 style={headerStyle}>{pokemon.name}</h2>{' '}
+					<img src={pokemon.imageUrl} alt={pokemon.name} />
+					<h4>weight: {pokemon.weight}</h4>
+					<h4>height: {pokemon.height}</h4>
+				</div>
+			</StyledPokemonDetail>
+		);
+	}
 }
 
 export default DetailedView;
