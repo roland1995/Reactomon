@@ -13,6 +13,7 @@ export default function MainBox() {
 	`;
 
 	const boxStyle = {
+		height: '100vh',
 		backgroundColor: `${value ? 'white' : 'black'}`,
 	};
 
